@@ -4,7 +4,7 @@ FROM archlinux:base-devel
 ENTRYPOINT ["/bin/zsh"]
 
 # Add my user
-RUN useradd -m deifyed
+RUN useradd -m dev
 
 # Install packages
 RUN pacman -Syu --noconfirm && \
@@ -16,8 +16,8 @@ RUN pacman -Syu --noconfirm && \
     pacman -S fzf tree bat exa kubectl --noconfirm
 
 # Change to user
-USER deifyed
-WORKDIR /home/deifyed
+USER dev
+WORKDIR /home/dev
 
 # Hack to get zsh to work due to dependency
 RUN echo "" >> ~/.aliases.secret
