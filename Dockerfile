@@ -15,15 +15,15 @@ RUN pacman -Syu --noconfirm && \
     # Nice to haves
     pacman -S fzf tree bat exa kubectl git-delta --noconfirm
 
+# Prepare git
+RUN ssh-keyscan github.com >> /etc/ssh/known_hosts
+
 # Change to user
 USER dev
 WORKDIR /home/dev
 
 # Hack to get zsh to work due to dependency
 RUN echo "" >> ~/.aliases.secret
-
-# Prepare git
-RUN mkdir -p -m 0700 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 # Prepare folders
 RUN \
