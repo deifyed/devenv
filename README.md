@@ -5,18 +5,19 @@
 ### Run script
 
 ```shell
-# See usage
+# Print usage
 sh run.sh -h
 
-# To mount .ssh folder and a certain workdir
-sh run.sh -s .ssh -w "."
+# Mount ~/.ssh folder and a workdir
+sh run.sh -s .ssh -w "./target"
 ```
 
 ### Direct container usage
 
 Run `docker run -it ghcr.io/deifyed/devenv` to enter the development environment.
 
-Add `--volume <path/to/your/project>:/home/dev/project` to mount your project directory into the container.
+Add `--volume type=bind,source=<path/to/your/project>,destination=/home/dev/project` to mount your project directory
+into the container.
 
 ## Motivation
 
