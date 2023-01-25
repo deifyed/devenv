@@ -13,7 +13,7 @@ RUN pacman -Syu --noconfirm && \
     # Dependencies
     pacman -S go npm unzip --noconfirm && \
     # Nice to haves
-    pacman -S fzf tree bat exa kubectl --noconfirm
+    pacman -S fzf tree bat exa kubectl git-delta --noconfirm
 
 # Change to user
 USER dev
