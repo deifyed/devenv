@@ -5,20 +5,22 @@ BUILD_LOCALLY=0
 VERSION="latest"
 FLAGS="-it --rm"
 
-usage() {
-    echo "Usage: $0 [-h] [-b] [-s] [-w <directory>] [-v <version>]"
-    echo "Flags:"
-    echo "  -h Show this help message"
-    echo "  -b Build local image"
-    echo "  -s Mount ~/.ssh directory"
-    echo "  -v <version> Version of the official image to use"
-    echo "  -w <directory> Mount a directory"
-}
-
+# Print verbose output
 v() {
     if [[ $VERBOSE -eq 1 ]]; then
         echo "$@"
     fi
+}
+
+# Print usage
+usage() {
+    v "Usage: $0 [-h] [-b] [-s] [-w <directory>] [-v <version>]"
+    v "Flags:"
+    v "  -h Show this help message"
+    v "  -b Build local image"
+    v "  -s Mount ~/.ssh directory"
+    v "  -v <version> Version of the official image to use"
+    v "  -w <directory> Mount a directory"
 }
 
 while getopts ":hbsvw:" option; do
