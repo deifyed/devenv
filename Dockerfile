@@ -33,7 +33,7 @@ RUN \
 # Install oh my zsh
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# Fetch necessary files
+# Fetch necessary and distribute dotfiles
 RUN \
     git clone https://github.com/rupa/z.git ~/.local/src/z && \
     git clone https://github.com/deifyed/vim ~/.config/nvim && \
@@ -41,5 +41,5 @@ RUN \
     sh ~/.local/src/dotfiles/infect.sh
 
 # Init vim
-RUN git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-RUN nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' > /dev/null 2>&1
+RUN git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim && \
+    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' > /dev/null 2>&1
