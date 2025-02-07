@@ -11,7 +11,7 @@ RUN pacman -Syu --noconfirm && \
     # Basic packages
     pacman -S zsh openssh keychain git neovim --noconfirm && \
     # Dependencies
-    pacman -S go npm unzip --noconfirm && \
+    pacman -S go npm unzip chezmoi --noconfirm && \
     # Nice to haves
     pacman -S fzf tree bat exa kubectl git-delta --noconfirm
 
@@ -33,13 +33,10 @@ RUN \
 # Install oh my zsh
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+RUN chezmoi init --apply deifyed
+
 # Fetch necessary and distribute dotfiles
-RUN \
-    git clone https://github.com/rupa/z.git ~/.local/src/z && \
-    git clone https://github.com/deifyed/vim ~/.config/nvim && \
-    git clone https://github.com/deifyed/dotfiles.git ~/.local/src/dotfiles && \
-    sh ~/.local/src/dotfiles/infect.sh
+#RUN git clone https://github.com/rupa/z.git ~/.local/src/z
 
 # Init vim
-RUN git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim && \
-    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' > /dev/null 2>&1
+RUN nvim --headless '+Lazy install' +MasonUpdate +qall
